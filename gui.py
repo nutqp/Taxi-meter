@@ -11,12 +11,17 @@ def check_error():
     try:
         distanc1 = int(distanc.get())
         time1 = int(time.get())
+        show_detail()
     except ValueError:
         tkMessageBox.showerror("Error input", "No valid integer! Please try again ...")
+def show_detail():
+    ''' show_detail '''
+    root.destroy()
 def page_root():
     '''  First page, 2 variables input '''
     global distanc
     global time
+    global root
     root = Tk()
     root.geometry('760x585+280+70')
     root.title("Taxi meter")
