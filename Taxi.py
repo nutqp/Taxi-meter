@@ -18,5 +18,9 @@ def taxi(kilometre, minute):
         price = 534 + (kilometre-80)*8.5
     ''' price '''
     price = int(price)
-    print price
+    ''' price time '''
+    minute1 = (int(floor((minute*1.50)/2))*2)-1
+    ''' sum price + time '''
+    summ = price + minute1
+    print price,summ
 taxi(input(), input())
