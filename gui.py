@@ -17,6 +17,25 @@ def check_error():
 def show_detail():
     ''' show_detail '''
     root.destroy()
+
+    global page_two
+    page_two = Tk()
+    page_two.title("Taxi meter")
+    page_two.geometry('760x585+280+70')
+    
+    frame = Frame(page_two).pack()
+    canvas = Canvas(frame, bg="white", width=750, height=580)
+    canvas.pack()
+    photoimage = ImageTk.PhotoImage(file="main_output.gif")
+    canvas.create_image(365, 289, image=photoimage)
+
+    BG_home = ImageTk.PhotoImage(Image.open("home.gif")) #PIC_BG_click
+    BG_click_home = Button(page_two, image=BG_home, cursor="hand2").place(x=55,y=420)#label_PIC_BG_click
+
+    BG_exit = ImageTk.PhotoImage(Image.open("exit.gif")) #PIC_BG_click
+    BG_click_exit = Button(page_two, image=BG_exit, cursor="hand2").place(x=147,y=420)#label_PIC_BG_click
+    
+    mainloop()
 def page_root():
     '''  First page, 2 variables input '''
     global distanc
