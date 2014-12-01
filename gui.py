@@ -14,6 +14,12 @@ def check_error():
         show_detail()
     except ValueError:
         tkMessageBox.showerror("Error input", "No valid integer! Please try again ...")
+def mquit():
+    ''' exit programe '''
+    mExit = tkMessageBox.askokcancel(title="Quit",message="Are You Sure")
+    if mExit > 0:
+        page_two.destroy()
+        return
 def show_detail():
     ''' show_detail '''
     root.destroy()
@@ -33,7 +39,7 @@ def show_detail():
     BG_click_home = Button(page_two, image=BG_home, cursor="hand2").place(x=55,y=420)#label_PIC_BG_click
 
     BG_exit = ImageTk.PhotoImage(Image.open("exit.gif")) #PIC_BG_click
-    BG_click_exit = Button(page_two, image=BG_exit, cursor="hand2").place(x=147,y=420)#label_PIC_BG_click
+    BG_click_exit = Button(page_two, image=BG_exit, cursor="hand2", command=mquit).place(x=147,y=420)#label_PIC_BG_click
     
     mainloop()
 def page_root():
@@ -55,9 +61,12 @@ def page_root():
     BG_click_label.bind("<Button-1>", google_map)
     BG_calculate = ImageTk.PhotoImage(Image.open("calculate.gif"))
     BG_calculate_label = Button(root, image=BG_calculate, command=check_error, cursor="hand2").place(x=325,y=425)
+    global distanc
+    global time
     distanc = IntVar()
     time = IntVar()
     button_distance = Entry(root, textvariable=distanc).place(x=282, y=260)
     button_time = Entry(root, textvariable=time).place(x=282, y=380)
     mainloop()
 page_root()
+
