@@ -21,6 +21,7 @@ def mquit():
         page_two.destroy()
         return
 def main2():
+    ''' back page_root '''
     page_two.destroy()
     page_root()
 def show_detail():
