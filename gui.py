@@ -20,6 +20,9 @@ def mquit():
     if mExit > 0:
         page_two.destroy()
         return
+def main2():
+    page_two.destroy()
+    page_root()
 def show_detail():
     ''' show_detail '''
     root.destroy()
@@ -36,7 +39,7 @@ def show_detail():
     canvas.create_image(365, 289, image=photoimage)
 
     BG_home = ImageTk.PhotoImage(Image.open("home.gif")) #PIC_BG_click
-    BG_click_home = Button(page_two, image=BG_home, cursor="hand2").place(x=55,y=420)#label_PIC_BG_click
+    BG_click_home = Button(page_two, image=BG_home, cursor="hand2",command=main2).place(x=55,y=420)#label_PIC_BG_click
 
     BG_exit = ImageTk.PhotoImage(Image.open("exit.gif")) #PIC_BG_click
     BG_click_exit = Button(page_two, image=BG_exit, cursor="hand2", command=mquit).place(x=147,y=420)#label_PIC_BG_click
