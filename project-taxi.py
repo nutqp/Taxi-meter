@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Tkinter import *
+from math import *
 from PIL import Image, ImageTk
 import webbrowser
 import tkMessageBox
@@ -14,6 +15,7 @@ def check_error():
         show_detail()
     except ValueError:
         tkMessageBox.showerror("Error input", "No valid integer! Please try again ...")
+
 def mquit():
     ''' exit programe '''
     mExit = tkMessageBox.askokcancel(title="Quit",message="Are You Sure")
@@ -28,6 +30,29 @@ def show_detail():
     ''' show_detail '''
     root.destroy()
 
+    kilometre = int(distanc.get())
+    minute = int(time.get())
+    if kilometre <= 1:
+        price = 35
+    elif kilometre <= 12:
+        price = 35 + (kilometre-1)*5
+    elif kilometre <= 20:
+        price = 90 + (kilometre-12)*5.5
+    elif kilometre <= 40:
+        price = 134 + (kilometre-20)*6
+    elif kilometre <= 60:
+        price = 254 + (kilometre-40)*6.5
+    elif kilometre <= 80:
+        price = 384 + (kilometre-60)*7.5
+    else:
+        price = 534 + (kilometre-80)*8.5
+    ''' price '''
+    price = int(price)
+    ''' price time '''
+    minute1 = int(floor((minute*1.50)/2)*2)
+    ''' sum price + time '''
+    total = price + minute1
+
     global page_two
     page_two = Tk()
     page_two.title("Taxi meter")
@@ -38,6 +63,12 @@ def show_detail():
     canvas.pack()
     photoimage = ImageTk.PhotoImage(file="main_output.gif")
     canvas.create_image(365, 289, image=photoimage)
+
+    Label(page_two,text = kilometre, fg = "red", font = "Times 15 bold").place(x=525,y=190) # output ระยะทาง
+    Label(page_two,text = minute, fg = "red", font = "Times 15 bold").place(x=525,y=228) # output เผื่อเวลารถติด
+    Label(page_two,text = price, fg = "red", font = "Times 15 bold").place(x=525,y=265) # output ราคาระยะทาง
+    Label(page_two,text = minute1, fg = "red", font = "Times 15 bold").place(x=525,y=305) # output ราคาเวลา
+    Label(page_two,text = total, fg = "red", font = "Times 30 bold").place(x=484,y=352) # output ราคารวม
 
     BG_home = ImageTk.PhotoImage(Image.open("home.gif")) #PIC_BG_click
     BG_click_home = Button(page_two, image=BG_home, cursor="hand2",command=main2).place(x=55,y=420)#label_PIC_BG_click
@@ -65,10 +96,8 @@ def page_root():
     BG_click_label.bind("<Button-1>", google_map)
     BG_calculate = ImageTk.PhotoImage(Image.open("calculate.gif"))
     BG_calculate_label = Button(root, image=BG_calculate, command=check_error, cursor="hand2").place(x=325,y=425)
-    global distanc
-    global time
-    distanc = IntVar()
-    time = IntVar()
+    distanc = StringVar()
+    time = StringVar()
     button_distance = Entry(root, textvariable=distanc).place(x=282, y=260)
     button_time = Entry(root, textvariable=time).place(x=282, y=380)
     mainloop()
